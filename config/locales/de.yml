@@ -47,6 +47,8 @@ de:
       models:
         work_package:
           attributes:
+            status_id:
+              not_allowed_for_current_user: "kann aufgrund der fehlenden Berechtigung nicht gändert werden. Daher wurde die Aufgabe nicht verschoben."
             blocks_ids:
               can_only_contain_work_packages_of_current_sprint: "kann nur IDs von Arbeitspaket des aktuellen Sprints enthalten"
               must_block_at_least_one_work_package: "muss die ID wenigstens eines Arbeitspakets enthalten"

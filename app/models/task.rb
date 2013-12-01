@@ -79,11 +79,24 @@ class Task < WorkPackage
   end
 
   def update_with_relationships(params, is_impediment = false)
+    # validate if status change is requested and allowed for current user
+    if params[:status_id].present?
+      unless new_status_allowed?(params[:status_id].to_i)
+        # add validation error, message and return
+        errors.add(:status_id, :not_allowed_for_current_user)
+        return false
+      end
+    end
+
     self.safe_attributes = params
 
     save.tap do |result|
       move_after(params[:prev]) if result
     end
+  end
+
+  def new_status_allowed?(status_id, user=User.current)
+    new_statuses_allowed_to(user).collect(&:id).include?(status_id)
   end
 
   # Assumes the task is already under the same story as 'prev_id'

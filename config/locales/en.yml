@@ -47,6 +47,8 @@ en:
       models:
         work_package:
           attributes:
+            status_id:
+              not_allowed_for_current_user: "cannot be changed because of missing user permissions. Therefore, the task could not be moved."
             blocks_ids:
               can_only_contain_work_packages_of_current_sprint: "can only contain the IDs of current sprint's tickets"
               must_block_at_least_one_work_package: "must contain the ID of at least one ticket"
